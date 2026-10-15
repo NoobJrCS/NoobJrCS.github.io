@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NoobJrCS | Cybersecurity & SecOps Engineering Portfolio</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: JetBrains Mono & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            cyber: {
+              bg: '#070B14',
+              card: '#0D1526',
+              border: '#1E293B',
+              accent: '#10B981', // Emerald 500
+              cyan: '#06B6D4',   // Cyan 500
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #070B14;
+      color: #E2E8F0;
+      background-image: 
+        radial-gradient(at 15% 10%, rgba(16, 185, 129, 0.08) 0px, transparent 45%),
+        radial-gradient(at 85% 30%, rgba(6, 182, 212, 0.08) 0px, transparent 50%),
+        linear-gradient(to right, rgba(30, 41, 59, 0.18) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(30, 41, 59, 0.18) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+    }
+    .glass-card {
+      background: rgba(13, 21, 38, 0.78);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(51, 65, 85, 0.55);
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .glass-card:hover {
+      border-color: rgba(16, 185, 129, 0.55);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px -10px rgba(16, 185, 129, 0.18);
+    }
+    .terminal-scroll::-webkit-scrollbar {
+      width: 6px;
+    }
+    .terminal-scroll::-webkit-scrollbar-track {
+      background: #070B14;
+    }
+    .terminal-scroll::-webkit-scrollbar-thumb {
+      background: #1E293B;
+      border-radius: 3px;
+    }
+    @keyframes pulse-slow {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    .status-dot {
+      animation: pulse-slow 2s infinite;
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-emerald-500/30 selection:text-emerald-300">
+
+  <!-- Sticky Navigation -->
+  <header class="sticky top-0 z-40 border-b border-slate-800/80 bg-[#070B14]/85 backdrop-blur-md">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-3 group">
+        <div class="w-9 h-9 rounded-lg bg-emerald-500/10 border border-emerald-500/40 flex items-center justify-center text-emerald-400 font-mono font-bold group-hover:bg-emerald-500 group-hover:text-slate-950 transition-colors">
+          &gt;_
+        </div>
+        <div>
+          <span class="font-mono font-bold text-white tracking-tight">NoobJrCS</span>
+          <span class="hidden sm:inline-block ml-2 text-xs font-mono px-2 py-0.5 rounded bg-slate-800 text-emerald-400 border border-slate-700">SecOps &amp; SIEM</span>
+        </div>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-300">
+        <a href="#terminal-section" class="hover:text-emerald-400 transition-colors font-mono text-xs">~/terminal</a>
+        <a href="#repositories" class="hover:text-emerald-400 transition-colors">Repositories (9)</a>
+        <a href="#skills" class="hover:text-emerald-400 transition-colors">Tech Arsenal</a>
+        <a href="#experience" class="hover:text-emerald-400 transition-colors">Experience &amp; Research</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a href="https://github.com/NoobJrCS?tab=repositories" target="_blank" rel="noopener noreferrer"
+           class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-mono font-medium bg-emerald-500 text-slate-950 hover:bg-emerald-400 transition-all shadow-lg shadow-emerald-500/10">
+          <i data-lucide="github" class="w-4 h-4"></i>
+          <span>github.com/NoobJrCS</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-20">
+
+    <!-- Hero Section -->
+    <section class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center pt-4">
+      <div class="lg:col-span-7 space-y-6">
+        <div class="inline-flex items-center gap-2.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-mono">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 status-dot"></span>
+          <span>SOC Automation • Threat Intelligence • Privacy Auditing</span>
+        </div>
+
+        <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight">
+          Engineering Automated <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">Cyber Defense</span> &amp; Threat Telemetry.
+        </h1>
+
+        <p class="text-slate-400 text-base sm:text-lg leading-relaxed max-w-2xl">
+          Cybersecurity Engineer &amp; Researcher specializing in <strong class="text-slate-200">Wazuh SIEM/SOAR architectures</strong>, automated <strong class="text-slate-200">Threat Intelligence (CTI) pipelines</strong>, active brute-force mitigation, and <strong class="text-slate-200">DPDP Act privacy compliance tooling</strong>.
+        </p>
+
+        <div class="flex flex-wrap items-center gap-3 pt-2">
+          <a href="#repositories" class="px-5 py-2.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold text-sm inline-flex items-center gap-2 transition-all">
+            <i data-lucide="folder-git-2" class="w-4 h-4"></i>
+            Explore Repositories
+          </a>
+          <a href="#terminal-section" class="px-5 py-2.5 rounded-lg bg-slate-800/90 hover:bg-slate-700 text-slate-200 border border-slate-700 font-mono text-xs inline-flex items-center gap-2 transition-all">
+            <i data-lucide="terminal" class="w-4 h-4 text-emerald-400"></i>
+            Launch Interactive CLI
+          </a>
+        </div>
+
+        <!-- Quick Telemetry Counters -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4">
+          <div class="glass-card p-3.5 rounded-xl">
+            <div class="text-2xl font-mono font-bold text-white">9</div>
+            <div class="text-xs text-slate-400">Public GitHub Repos</div>
+          </div>
+          <div class="glass-card p-3.5 rounded-xl">
+            <div class="text-2xl font-mono font-bold text-emerald-400">5+</div>
+            <div class="text-xs text-slate-400">SecOps Pipelines</div>
+          </div>
+          <div class="glass-card p-3.5 rounded-xl">
+            <div class="text-2xl font-mono font-bold text-cyan-400">2</div>
+            <div class="text-xs text-slate-400">Security Internships</div>
+          </div>
+          <div class="glass-card p-3.5 rounded-xl">
+            <div class="text-2xl font-mono font-bold text-purple-400">1</div>
+            <div class="text-xs text-slate-400">SIEM Review Paper</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Profile Card & Live Telemetry Widget -->
+      <div class="lg:col-span-5">
+        <div class="glass-card rounded-2xl p-6 relative overflow-hidden">
+          <div class="absolute -right-12 -top-12 w-40 h-40 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none"></div>
+          
+          <div class="flex items-center gap-4 pb-5 border-b border-slate-800">
+            <img src="https://avatars.githubusercontent.com/u/213188870?v=4" alt="NoobJrCS Avatar" 
+                 class="w-16 h-16 rounded-xl border-2 border-emerald-500/50 object-cover bg-slate-900" />
+            <div>
+              <div class="flex items-center gap-2">
+                <h2 class="text-lg font-bold text-white font-mono">@NoobJrCS</h2>
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">Verified Profile</span>
+              </div>
+              <p class="text-xs text-slate-400 mt-1">Blue Team • SIEM/SOAR • Python Automation</p>
+              <p class="text-xs text-slate-500 font-mono mt-0.5 flex items-center gap-1">
+                <i data-lucide="map-pin" class="w-3 h-3 text-emerald-400"></i> Gujarat, India
+              </p>
+            </div>
+          </div>
+
+          <div class="py-4 space-y-3 text-xs font-mono">
+            <div class="text-slate-400 uppercase tracking-wider text-[10px] font-semibold">Active Defense Stack</div>
+            
+            <div class="flex items-center justify-between p-2.5 rounded-lg bg-slate-900/90 border border-slate-800">
+              <span class="text-slate-300 flex items-center gap-2">
+                <i data-lucide="shield-alert" class="w-4 h-4 text-emerald-400"></i> SIEM &amp; Active Response
+              </span>
+              <span class="text-emerald-400">Wazuh + Ubuntu/Win10</span>
+            </div>
+
+            <div class="flex items-center justify-between p-2.5 rounded-lg bg-slate-900/90 border border-slate-800">
+              <span class="text-slate-300 flex items-center gap-2">
+                <i data-lucide="radar" class="w-4 h-4 text-cyan-400"></i> Threat Intel Feed
+              </span>
+              <span class="text-cyan-400">OTXv2 API + VirusTotal</span>
+            </div>
+
+            <div class="flex items-center justify-between p-2.5 rounded-lg bg-slate-900/90 border border-slate-800">
+              <span class="text-slate-300 flex items-center gap-2">
+                <i data-lucide="scale" class="w-4 h-4 text-purple-400"></i> Regulatory Auditing
+              </span>
+              <span class="text-purple-400">DPDP Act Web Scanner</span>
+            </div>
+
+            <div class="flex items-center justify-between p-2.5 rounded-lg bg-slate-900/90 border border-slate-800">
+              <span class="text-slate-300 flex items-center gap-2">
+                <i data-lucide="lock" class="w-4 h-4 text-amber-400"></i> AppSec Engineering
+              </span>
+              <span class="text-amber-400">Python + Flask Auth</span>
+            </div>
+          </div>
+
+          <div class="pt-3 border-t border-slate-800 flex items-center justify-between text-xs">
+            <span class="text-slate-400 font-mono">Status: <span class="text-emerald-400">Ready for SecOps Roles</span></span>
+            <a href="https://github.com/NoobJrCS" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline font-mono inline-flex items-center gap-1">
+              View GitHub <i data-lucide="external-link" class="w-3 h-3"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive SecOps Terminal Widget -->
+    <section id="terminal-section" class="scroll-mt-20">
+      <div class="glass-card rounded-2xl overflow-hidden border border-slate-700/70 shadow-2xl">
+        <!-- Terminal Title Bar -->
+        <div class="bg-slate-900/95 px-4 py-3 border-b border-slate-800 flex flex-wrap items-center justify-between gap-2">
+          <div class="flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-rose-500/80"></span>
+            <span class="w-3 h-3 rounded-full bg-amber-500/80"></span>
+            <span class="w-3 h-3 rounded-full bg-emerald-500/80"></span>
+            <span class="ml-2 text-xs font-mono text-slate-400">noobjrcs@secops-lab:~/portfolio$</span>
+          </div>
+          <div class="flex flex-wrap items-center gap-1.5">
+            <span class="text-[11px] font-mono text-slate-500 mr-1">Quick run:</span>
+            <button onclick="runCommand('whoami')" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-emerald-500/20 hover:text-emerald-300 text-slate-300 border border-slate-700 text-[11px] font-mono transition-colors">whoami</button>
+            <button onclick="runCommand('ls --repos')" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-emerald-500/20 hover:text-emerald-300 text-slate-300 border border-slate-700 text-[11px] font-mono transition-colors">ls --repos</button>
+            <button onclick="runCommand('cat research.txt')" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-emerald-500/20 hover:text-emerald-300 text-slate-300 border border-slate-700 text-[11px] font-mono transition-colors">cat research.txt</button>
+            <button onclick="runCommand('skills --matrix')" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-emerald-500/20 hover:text-emerald-300 text-slate-300 border border-slate-700 text-[11px] font-mono transition-colors">skills --matrix</button>
+            <button onclick="runCommand('clear')" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-rose-500/20 hover:text-rose-300 text-slate-400 border border-slate-700 text-[11px] font-mono transition-colors">clear</button>
+          </div>
+        </div>
+
+        <!-- Terminal Output Body -->
+        <div id="terminal-output" class="p-5 font-mono text-xs sm:text-sm space-y-3 h-64 overflow-y-auto terminal-scroll bg-[#050811]/90 text-slate-300">
+          <div class="text-emerald-400">Welcome to NoobJrCS Interactive Security Shell v2.6.0</div>
+          <div class="text-slate-400">Type <span class="text-white font-semibold">help</span> or click any command button above to inspect repositories, SIEM architecture, and research credentials.</div>
+        </div>
+
+        <!-- Terminal Input Line -->
+        <form id="terminal-form" class="bg-slate-900/90 px-4 py-2.5 border-t border-slate-800 flex items-center gap-2">
+          <span class="text-emerald-400 font-mono text-xs sm:text-sm font-bold">noobjrcs@secops:~$</span>
+          <input id="terminal-input" type="text" placeholder="Type a command (help, whoami, ls --repos, cat research.txt, clear)..." 
+                 autocomplete="off"
+                 class="w-full bg-transparent text-white font-mono text-xs sm:text-sm focus:outline-none placeholder:text-slate-600" />
+          <button type="submit" class="px-3 py-1 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-xs font-mono hover:bg-emerald-500 hover:text-slate-950 transition-colors">
+            Run
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Repositories & Projects Showcase -->
+    <section id="repositories" class="space-y-8 scroll-mt-20">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div>
+          <div class="text-xs font-mono text-emerald-400 uppercase tracking-wider mb-1">// GitHub Repository Index</div>
+          <h2 class="text-2xl sm:text-3xl font-bold text-white">Security Engineering &amp; Automation Repositories</h2>
+        </div>
+
+        <!-- Search Input -->
+        <div class="relative w-full md:w-72">
+          <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+          <input id="repo-search" type="text" placeholder="Filter by tool, API, or language..." 
+                 class="w-full pl-10 pr-4 py-2 rounded-xl bg-slate-900/90 border border-slate-700/80 text-sm text-slate-200 placeholder:text-slate-500 focus:outline-none focus:border-emerald-500" />
+        </div>
+      </div>
+
+      <!-- Category Filter Pills -->
+      <div id="category-filters" class="flex flex-wrap gap-2">
+        <button data-category="all" class="filter-btn active px-4 py-1.5 rounded-lg text-xs font-mono font-medium bg-emerald-500 text-slate-950 transition-all">
+          All Projects
+        </button>
+        <button data-category="SIEM & SOAR" class="filter-btn px-4 py-1.5 rounded-lg text-xs font-mono font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-emerald-500/50 transition-all">
+          SIEM &amp; SOAR
+        </button>
+        <button data-category="Threat Intel" class="filter-btn px-4 py-1.5 rounded-lg text-xs font-mono font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-emerald-500/50 transition-all">
+          Threat Intel &amp; Bots
+        </button>
+        <button data-category="Compliance" class="filter-btn px-4 py-1.5 rounded-lg text-xs font-mono font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-emerald-500/50 transition-all">
+          Privacy &amp; Compliance
+        </button>
+        <button data-category="AppSec" class="filter-btn px-4 py-1.5 rounded-lg text-xs font-mono font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-emerald-500/50 transition-all">
+          AppSec &amp; Web
+        </button>
+      </div>
+
+      <!-- Dynamic Repository Cards Grid -->
+      <div id="repo-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Populated dynamically via JS -->
+      </div>
+    </section>
+
+    <!-- Technical Skills & Arsenal -->
+    <section id="skills" class="space-y-8 scroll-mt-20">
+      <div>
+        <div class="text-xs font-mono text-cyan-400 uppercase tracking-wider mb-1">// Defensive Capabilities</div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-white">Technical Arsenal &amp; Lab Stack</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Column 1 -->
+        <div class="glass-card p-6 rounded-2xl space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">
+              <i data-lucide="shield-check" class="w-5 h-5"></i>
+            </div>
+            <h3 class="font-bold text-white">SIEM, SOAR &amp; Blue Team</h3>
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Designing multi-VM telemetry networks, custom XML decoding/correlation rules, and automated active-response quarantine workflows.
+          </p>
+          <div class="flex flex-wrap gap-2 pt-2">
+            <span class="px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800 text-xs font-mono text-emerald-300">Wazuh SIEM</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800 text-xs font-mono text-slate-300">Active Response</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800 text-xs font-mono text-slate-300">Log Analysis</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800 text-xs font-mono text-slate-300">Deception Honeypots</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800 text-xs font-mono text-slate-300">Brute-Force Mitigation</span>
+          </div>
+        </div>
+
+        <!-- Column 2 -->
+        <div class="glass-card p-6 rounded-2xl space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="p-2.5 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400">
+              <i data-lucide="code-2" class="w-5 h-5"></i>
+            </div>
+            <h3 class="font-bold text-white">Security Automation &amp; AppSec</h3>
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Building API-driven Threat Intelligence ingestion pipelines, automated phishing triage bots, and hardened Python web applications.
+          </p>
+          <div class="flex flex-wrap gap-2 pt-2">
+            <span class="px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800 text-xs font-mono text-cyan-300">Python 3</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800 text-xs font-mono text-slate-300">AlienVault OTXv2</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800 text-xs font-mono text-slate-300">VirusTotal API</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800 text-xs font-mono text-slate-300">Flask Security</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800 text-xs font-mono text-slate-300">Headless JS Crawling</span>
+          </div>
+        </div>
+
+        <!-- Column 3 -->
+        <div class="glass-card p-6 rounded-2xl space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="p-2.5 rounded-xl bg-purple-500/10 border border-purple-500/30 text-purple-400">
+              <i data-lucide="server" class="w-5 h-5"></i>
+            </div>
+            <h3 class="font-bold text-white">Lab Infrastructure &amp; GRC</h3>
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Simulating adversarial attacks across virtualized enterprise topologies and auditing web properties for statutory data privacy compliance.
+          </p>
+          <div class="flex flex-wrap gap-2 pt-2">
+            <span class="px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800 text-xs font-mono text-purple-300">VMware Workstation Pro</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800 text-xs font-mono text-slate-300">Kali Linux &amp; Hydra</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800 text-xs font-mono text-slate-300">Ubuntu Server</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800 text-xs font-mono text-slate-300">DPDP Act Auditing</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800 text-xs font-mono text-slate-300">Git &amp; GitHub</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Research & Experience Timeline -->
+    <section id="experience" class="space-y-8 scroll-mt-20">
+      <div>
+        <div class="text-xs font-mono text-purple-400 uppercase tracking-wider mb-1">// Credentials &amp; Publications</div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-white">Experience, Internships &amp; Research</h2>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <!-- Featured Research Paper Card -->
+        <div class="lg:col-span-5 glass-card p-6 rounded-2xl flex flex-col justify-between border-l-4 border-l-emerald-500">
+          <div class="space-y-4">
+            <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-emerald-500/10 text-emerald-400 text-xs font-mono">
+              <i data-lucide="book-open-check" class="w-4 h-4"></i> Academic Review Paper
+            </div>
+            <h3 class="text-xl font-bold text-white leading-snug">
+              "A Comprehensive Review of Automated Threat Detection: Integrating Open-Source SIEM and Deception Engineering"
+            </h3>
+            <p class="text-sm text-slate-400 leading-relaxed">
+              Authored an IEEE-formatted research review examining how open-source SIEM architectures (such as Wazuh) combine with deception engineering and automated active response to reduce Mean Time to Detect (MTTD) and Mean Time to Respond (MTTR).
+            </p>
+          </div>
+          <div class="pt-6 mt-6 border-t border-slate-800 flex flex-wrap gap-2">
+            <span class="text-[11px] font-mono px-2.5 py-1 rounded bg-slate-900 text-slate-300 border border-slate-800">IEEE Citation Standard</span>
+            <span class="text-[11px] font-mono px-2.5 py-1 rounded bg-slate-900 text-slate-300 border border-slate-800">Open-Source SIEM</span>
+            <span class="text-[11px] font-mono px-2.5 py-1 rounded bg-slate-900 text-slate-300 border border-slate-800">Deception Tech</span>
+          </div>
+        </div>
+
+        <!-- Experience Timeline -->
+        <div class="lg:col-span-7 space-y-4">
+          <div class="glass-card p-5 rounded-2xl flex items-start gap-4">
+            <div class="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 shrink-0 mt-1">
+              <i data-lucide="shield" class="w-5 h-5"></i>
+            </div>
+            <div class="space-y-1">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <h4 class="font-bold text-white">Cyber Crime Volunteer</h4>
+                <span class="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-2.5 py-0.5 rounded">Cyber Awareness &amp; Reporting</span>
+              </div>
+              <p class="text-xs text-slate-400 leading-relaxed">
+                Registered contributor supporting cyber hygiene, unlawful content flagging, and public digital safety initiatives.
+              </p>
+            </div>
+          </div>
+
+          <div class="glass-card p-5 rounded-2xl flex items-start gap-4">
+            <div class="p-2.5 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 shrink-0 mt-1">
+              <i data-lucide="key-round" class="w-5 h-5"></i>
+            </div>
+            <div class="space-y-1">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <h4 class="font-bold text-white">Cybersecurity Intern — Vault-Tec Security</h4>
+                <span class="text-xs font-mono text-cyan-400 bg-cyan-500/10 px-2.5 py-0.5 rounded">Certified Completion</span>
+              </div>
+              <p class="text-xs text-slate-400 leading-relaxed">
+                Architected and debugged the <code class="text-slate-200">vault-tec-secure-login</code> web portal in Flask, implementing hardened database handling, route security, and authentication controls.
+              </p>
+            </div>
+          </div>
+
+          <div class="glass-card p-5 rounded-2xl flex items-start gap-4">
+            <div class="p-2.5 rounded-xl bg-purple-500/10 border border-purple-500/30 text-purple-400 shrink-0 mt-1">
+              <i data-lucide="terminal-square" class="w-5 h-5"></i>
+            </div>
+            <div class="space-y-1">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <h4 class="font-bold text-white">Cybersecurity Intern — Linux World Informatics Pvt Ltd</h4>
+                <span class="text-xs font-mono text-purple-400 bg-purple-500/10 px-2.5 py-0.5 rounded">Linux &amp; Security Ops</span>
+              </div>
+              <p class="text-xs text-slate-400 leading-relaxed">
+                Hands-on systems administration, Linux security hardening, network defense fundamentals, and security tooling workflows.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Architecture Deep-Dive Modal -->
+  <div id="project-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm">
+    <div class="glass-card max-w-2xl w-full rounded-2xl p-6 sm:p-8 border border-slate-700 space-y-6 relative shadow-2xl">
+      <button onclick="closeModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white p-1.5 rounded-lg bg-slate-800/80">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="space-y-2 pr-8">
+        <span id="modal-category" class="text-xs font-mono px-2.5 py-0.5 rounded bg-emerald-500/15 text-emerald-400 border border-emerald-500/30"></span>
+        <h3 id="modal-title" class="text-2xl font-bold text-white font-mono"></h3>
+      </div>
+
+      <p id="modal-description" class="text-sm text-slate-300 leading-relaxed"></p>
+
+      <div class="space-y-2">
+        <div class="text-xs font-mono uppercase tracking-wider text-emerald-400">// System Architecture &amp; Data Flow</div>
+        <div id="modal-architecture" class="p-4 rounded-xl bg-slate-950 border border-slate-800 font-mono text-xs text-slate-300 leading-relaxed whitespace-pre-line"></div>
+      </div>
+
+      <div class="space-y-2">
+        <div class="text-xs font-mono uppercase tracking-wider text-cyan-400">// Key Engineering Outcomes</div>
+        <ul id="modal-outcomes" class="space-y-1.5 text-xs sm:text-sm text-slate-300 list-disc list-inside"></ul>
+      </div>
+
+      <div class="pt-4 border-t border-slate-800 flex items-center justify-between gap-4">
+        <div id="modal-tags" class="flex flex-wrap gap-1.5"></div>
+        <a id="modal-link" href="https://github.com/NoobJrCS?tab=repositories" target="_blank" rel="noopener noreferrer"
+           class="shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-mono text-xs font-semibold transition-all">
+          <i data-lucide="github" class="w-4 h-4"></i> Open on GitHub
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-800/80 mt-20 py-8 text-center text-xs font-mono text-slate-500">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>Built for <span class="text-slate-300">@NoobJrCS</span> • SecOps &amp; Cybersecurity Portfolio</div>
+      <div class="flex items-center gap-4">
+        <a href="https://github.com/NoobJrCS" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-400 transition-colors">GitHub Profile</a>
+        <span>•</span>
+        <a href="https://github.com/NoobJrCS?tab=repositories" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-400 transition-colors">All 9 Repositories</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Interactive Portfolio Logic -->
+  <script>
+    // =========================================================================
+    // CONFIGURATION: Edit or add any of your 9 repository slugs & details here
+    // =========================================================================
+    const PROJECTS = [
+      {
+        id: 'soc-automation-lab',
+        name: 'automated-soc-homelab',
+        title: 'Automated SOC Lab & Active Defense',
+        category: 'SIEM & SOAR',
+        featured: true,
+        description: 'Enterprise-grade virtualized SOC lab integrating Wazuh SIEM, Ubuntu Server, Windows 10 endpoints, and Kali Linux to detect brute-force attacks and trigger automated firewall quarantine.',
+        tags: ['Wazuh SIEM', 'SOAR', 'VMware Pro', 'Kali Linux', 'Hydra', 'Ubuntu Server'],
+        architecture: `[Kali Linux: Hydra RDP/SSH Attack] 
+   ──► [Windows 10 / Ubuntu Agent Telemetry] 
+   ──► [Wazuh Manager: Rule Correlation & Severity Escalation] 
+   ──► [Active Response Module: Automated IP Drop / Firewall Block]`,
+        outcomes: [
+          'Simulated live SSH and RDP brute-force credential attacks using Hydra from Kali Linux.',
+          'Engineered custom Wazuh correlation alerts and active-response scripts to block offending IPs in real time.',
+          'Aligned log retention and endpoint auditing with DPDP compliance monitoring principles.'
+        ],
+        repoUrl: 'https://github.com/NoobJrCS?tab=repositories'
+      },
+      {
+        id: 'cti-ingestion-pipeline',
+        name: 'automated-cti-wazuh-pipeline',
+        title: 'Automated CTI Ingestion System',
+        category: 'Threat Intel',
+        featured: true,
+        description: 'Automated Cyber Threat Intelligence pipeline in Python that pulls live Indicators of Compromise (IOCs) from AlienVault OTXv2 and synchronizes them into Wazuh CDB lists for real-time matching.',
+        tags: ['Python', 'AlienVault OTXv2', 'Wazuh CDB', 'Threat Intel', 'Custom XML Rules'],
+        architecture: `[AlienVault OTXv2 Pulses API] 
+   ──► [Python CTI Ingestion & Sanitization Daemon] 
+   ──► [Wazuh CDB List Formatting (/var/ossec/etc/lists)] 
+   ──► [Custom Wazuh XML Rules: Instant IOC Alerting]`,
+        outcomes: [
+          'Automated polling and deduplication of malicious IPs, domains, and file hashes via OTXv2.',
+          'Eliminated manual IOC updating by converting threat feeds directly into Wazuh CDB key-value lists.',
+          'Authored custom Wazuh rule definitions triggered whenever endpoint traffic matches ingested IOCs.'
+        ],
+        repoUrl: 'https://github.com/NoobJrCS?tab=repositories'
+      },
+      {
+        id: 'dpdp-compliance-scanner',
+        name: 'dpdp-act-compliance-scanner',
+        title: 'DPDP Act Web Compliance Scanner',
+        category: 'Compliance',
+        featured: true,
+        description: 'Automated privacy auditing engine built to inspect Indian websites against Digital Personal Data Protection (DPDP) Act standards using headless JavaScript rendering and DOM consent analysis.',
+        tags: ['Python', 'DPDP Act', 'Headless Browser', 'Web Crawling', 'Privacy Audit'],
+        architecture: `[Target Website URL] 
+   ──► [Headless JS Crawler & Cookie/Tracker Interceptor] 
+   ──► [Consent Banner & Privacy Notice Analyzer] 
+   ──► [Automated DPDP Compliance Risk Report]`,
+        outcomes: [
+          'Detects pre-ticked consent boxes, missing privacy disclosures, and unauthorized third-party trackers.',
+          'Handles modern Single-Page Applications (SPAs) via full JavaScript DOM rendering prior to inspection.',
+          'Generates structured compliance gap reports mapped to statutory data protection requirements.'
+        ],
+        repoUrl: 'https://github.com/NoobJrCS?tab=repositories'
+      },
+      {
+        id: 'phishing-response-bot',
+        name: 'phishing-response-bot',
+        title: 'Automated Phishing Triage Bot',
+        category: 'Threat Intel',
+        featured: false,
+        description: 'SecOps triage utility leveraging Python and the VirusTotal v3 API to automatically scan suspicious URLs, aggregate multi-engine detections, and classify phishing risk.',
+        tags: ['Python', 'VirusTotal API', 'Phishing Triage', 'SecOps Automation', 'JSON'],
+        architecture: `[Suspicious URL / Email IOC Input] 
+   ──► [Python Async Query Engine] 
+   ──► [VirusTotal Multi-Vendor Reputation API] 
+   ──► [Risk Score Verdict & Analyst Summary]`,
+        outcomes: [
+          'Automates repetitive Tier-1 SOC URL reputation lookups across 70+ security vendors.',
+          'Parses vendor telemetry into clear Malicious / Suspicious / Clean verdicts for rapid incident response.'
+        ],
+        repoUrl: 'https://github.com/NoobJrCS?tab=repositories'
+      },
+      {
+        id: 'vault-tec-secure-login',
+        name: 'vault-tec-secure-login',
+        title: 'Vault-Tec Secure Login Portal',
+        category: 'AppSec',
+        featured: false,
+        description: 'Hardened web authentication application developed in Python and Flask featuring secure session management, parameterized database queries, and resilient route error handling.',
+        tags: ['Python', 'Flask', 'SQLite', 'AppSec', 'Authentication'],
+        architecture: `[Client HTTPS Request] 
+   ──► [Flask Route & Input Validation Middleware] 
+   ──► [Parameterized Database Auth Check] 
+   ──► [Hardened Session Token Issuance]`,
+        outcomes: [
+          'Developed during the Vault-Tec Security Cybersecurity Internship.',
+          'Mitigated common OWASP authentication flaws including SQL injection and insecure session routing.'
+        ],
+        repoUrl: 'https://github.com/NoobJrCS?tab=repositories'
+      },
+      {
+        id: 'siem-deception-research',
+        name: 'siem-deception-review-artifacts',
+        title: 'SIEM & Deception Engineering Review',
+        category: 'SIEM & SOAR',
+        featured: false,
+        description: 'Supporting rule configurations, architectural taxonomy, and IEEE bibliography for integrating open-source SIEM platforms with deception honeypots.',
+        tags: ['SIEM Research', 'Deception Engineering', 'Wazuh', 'IEEE Format', 'Threat Detection'],
+        architecture: `[Decoy Honeypot / Deception Token] 
+   ──► [High-Fidelity Alert Generation] 
+   ──► [Open-Source SIEM Correlation Engine] 
+   ──► [Zero-False-Positive Automated Containment]`,
+        outcomes: [
+          'Synthesized modern literature on combining high-interaction deception tokens with open-source SIEMs.',
+          'Demonstrated how deception telemetry drastically lowers false-positive rates in automated active response.'
+        ],
+        repoUrl: 'https://github.com/NoobJrCS?tab=repositories'
+      }
+    ];
+
+    // Render Repository Cards
+    const repoGrid = document.getElementById('repo-grid');
+    const searchInput = document.getElementById('repo-search');
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    let activeCategory = 'all';
+
+    function renderProjects() {
+      const query = searchInput.value.toLowerCase().trim();
+      const filtered = PROJECTS.filter(project => {
+        const matchesCat = activeCategory === 'all' || project.category === activeCategory;
+        const matchesQuery =
+          project.title.toLowerCase().includes(query) ||
+          project.name.toLowerCase().includes(query) ||
+          project.description.toLowerCase().includes(query) ||
+          project.tags.some(t => t.toLowerCase().includes(query));
+        return matchesCat && matchesQuery;
+      });
+
+      if (filtered.length === 0) {
+        repoGrid.innerHTML = `
+          <div class="col-span-full glass-card p-8 rounded-2xl text-center space-y-2">
+            <div class="text-emerald-400 font-mono text-sm">No matching repositories found</div>
+            <p class="text-xs text-slate-400">Try clearing your search filter or selecting "All Projects".</p>
+          </div>
+        `;
+        return;
+      }
+
+      repoGrid.innerHTML = filtered.map(p => `
+        <article class="glass-card rounded-2xl p-6 flex flex-col justify-between space-y-5">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between gap-2">
+              <span class="inline-flex items-center gap-1.5 text-xs font-mono text-emerald-400">
+                <i data-lucide="book-marked" class="w-4 h-4"></i>
+                ${p.name}
+              </span>
+              <span class="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-slate-800 text-slate-300 border border-slate-700">
+                ${p.category}
+              </span>
+            </div>
+
+            <h3 class="text-lg font-bold text-white group-hover:text-emerald-400 transition-colors">
+              ${p.title}
+            </h3>
+
+            <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+              ${p.description}
+            </p>
+          </div>
+
+          <div class="space-y-4 pt-2">
+            <div class="flex flex-wrap gap-1.5">
+              ${p.tags.map(tag => `
+                <span class="px-2 py-0.5 rounded bg-slate-900/90 border border-slate-800 text-[11px] font-mono text-slate-300">
+                  ${tag}
+                </span>
+              `).join('')}
+            </div>
+
+            <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between gap-2">
+              <button onclick="openModal('${p.id}')" 
+                      class="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-emerald-400 hover:text-emerald-300 transition-colors">
+                <i data-lucide="cpu" class="w-3.5 h-3.5"></i> Inspect Architecture
+              </button>
+              <a href="${p.repoUrl}" target="_blank" rel="noopener noreferrer"
+                 class="inline-flex items-center gap-1 text-xs font-mono text-slate-400 hover:text-white transition-colors">
+                GitHub <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+              </a>
+            </div>
+          </div>
+        </article>
+      `).join('');
+
+      lucide.createIcons();
+    }
+
+    // Category filter click events
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        activeCategory = btn.getAttribute('data-category');
+        filterButtons.forEach(b => {
+          b.className = 'filter-btn px-4 py-1.5 rounded-lg text-xs font-mono font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-emerald-500/50 transition-all';
+        });
+        btn.className = 'filter-btn active px-4 py-1.5 rounded-lg text-xs font-mono font-medium bg-emerald-500 text-slate-950 transition-all';
+        renderProjects();
+      });
+    });
+
+    searchInput.addEventListener('input', renderProjects);
+
+    // Modal Inspection Logic
+    const modal = document.getElementById('project-modal');
+    function openModal(projectId) {
+      const p = PROJECTS.find(item => item.id === projectId);
+      if (!p) return;
+      document.getElementById('modal-category').textContent = p.category;
+      document.getElementById('modal-title').textContent = p.title;
+      document.getElementById('modal-description').textContent = p.description;
+      document.getElementById('modal-architecture').textContent = p.architecture;
+      document.getElementById('modal-outcomes').innerHTML = p.outcomes.map(o => `<li>${o}</li>`).join('');
+      document.getElementById('modal-tags').innerHTML = p.tags.map(t => `<span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-[11px] font-mono text-emerald-300">${t}</span>`).join('');
+      document.getElementById('modal-link').href = p.repoUrl;
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      lucide.createIcons();
+    }
+
+    function closeModal() {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+
+    // Interactive Terminal Logic
+    const termOutput = document.getElementById('terminal-output');
+    const termForm = document.getElementById('terminal-form');
+    const termInput = document.getElementById('terminal-input');
+
+    const COMMANDS = {
+      'help': () => `
+        <div class="text-slate-300 space-y-1">
+          <div class="text-emerald-400 font-semibold">Available Security Shell Commands:</div>
+          <div><span class="text-cyan-400">whoami</span>           — Display profile summary &amp; SecOps focus</div>
+          <div><span class="text-cyan-400">ls --repos</span>       — List flagship GitHub repositories (9 total)</div>
+          <div><span class="text-cyan-400">cat research.txt</span> — Inspect published SIEM &amp; Deception review paper</div>
+          <div><span class="text-cyan-400">skills --matrix</span>  — Show technical defense &amp; automation stack</div>
+          <div><span class="text-cyan-400">clear</span>            — Clear terminal history</div>
+        </div>
+      `,
+      'whoami': () => `
+        <div class="text-slate-300 space-y-1">
+          <div><span class="text-emerald-400">Handle:</span> @NoobJrCS (GitHub UID: 213188870)</div>
+          <div><span class="text-emerald-400">Focus:</span> Blue Team SecOps, Wazuh SIEM/SOAR, Threat Intel Automation, DPDP Compliance</div>
+          <div><span class="text-emerald-400">Experience:</span> Cybersecurity Intern @ Vault-Tec Security &amp; Linux World Informatics Pvt Ltd | Cyber Crime Volunteer</div>
+        </div>
+      `,
+      'ls --repos': () => `
+        <div class="text-slate-300 space-y-1">
+          <div class="text-emerald-400">drwxr-xr-x  9 noobjrcs secops  4096 Oct 2026  github.com/NoobJrCS</div>
+          ${PROJECTS.map(p => `<div>• <span class="text-cyan-400 font-semibold">${p.name}</span> — [${p.category}]${p.title}</div>`).join('')}
+        </div>
+      `,
+      'cat research.txt': () => `
+        <div class="p-3 rounded bg-slate-900 border border-slate-800 text-slate-300 space-y-1">
+          <div class="text-emerald-400 font-semibold">Title: "A Comprehensive Review of Automated Threat Detection: Integrating Open-Source SIEM and Deception Engineering"</div>
+          <div>Focus: Combining Wazuh SIEM telemetry with high-fidelity deception honeypots and automated active response to minimize false positives and accelerate containment.</div>
+        </div>
+      `,
+      'skills --matrix': () => `
+        <div class="text-slate-300 space-y-1">
+          <div><span class="text-emerald-400">[SIEM &amp; SOAR]</span>    ██████████ 95% (Wazuh, Custom XML Rules, CDB Lists, Active Response)</div>
+          <div><span class="text-cyan-400">[Automation]</span>     █████████░ 90% (Python 3, AlienVault OTXv2, VirusTotal API, Crawlers)</div>
+          <div><span class="text-purple-400">[Lab &amp; Infra]</span>    █████████░ 88% (VMware Pro, Kali Linux, Hydra, Ubuntu Server, Win10)</div>
+          <div><span class="text-amber-400">[AppSec &amp; GRC]</span>   ████████░░ 85% (DPDP Act Auditing, Flask Auth, OWASP Hardening)</div>
+        </div>
+      `
+    };
+
+    function runCommand(rawCmd) {
+      const cmd = rawCmd.trim().toLowerCase();
+      if (!cmd) return;
+
+      if (cmd === 'clear') {
+        termOutput.innerHTML = `<div class="text-slate-500">Terminal cleared. Type <span class="text-emerald-400">help</span> for commands.</div>`;
+        return;
+      }
+
+      const responseFn = COMMANDS[cmd];
+      const outputHtml = responseFn 
+        ? responseFn() 
+        : `<div class="text-rose-400">Command not recognized: "${rawCmd}". Type <span class="text-emerald-400">help</span> for available commands.</div>`;
+
+      termOutput.innerHTML += `
+        <div class="space-y-1 pt-1">
+          <div><span class="text-emerald-400 font-bold">noobjrcs@secops:~$</span> <span class="text-white">${rawCmd}</span></div>
+          ${outputHtml}
+        </div>
+      `;
+      termOutput.scrollTop = termOutput.scrollHeight;
+    }
+
+    termForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const val = termInput.value;
+      termInput.value = '';
+      runCommand(val);
+    });
+
+    // Initialize
+    renderProjects();
+    lucide.createIcons();
+  </script>
+</body>
+</html>
